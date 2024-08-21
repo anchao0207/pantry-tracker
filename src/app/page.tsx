@@ -14,16 +14,16 @@ import {
 } from "firebase/firestore";
 
 export default function Home() {
-  const [inventory, setInventory] = useState([]);
+  const [inventory, setInventory] = useState<any[]>([]);
   const [open, setOpen] = useState(false);
   const [itemName, setItemName] = useState("");
   const [search, setSearch] = useState("");
-  const [display, setDisplay] = useState([])
+  const [display, setDisplay] = useState<any[]>([])
 
   const updateInventory = async () => {
     const snapshot = query(collection(firestore, "inventory"));
     const docs = await getDocs(snapshot);
-    const inventoryList = [];
+    const inventoryList : any[] = [];
 
     docs.forEach((doc) => {
       inventoryList.push({
@@ -37,7 +37,7 @@ export default function Home() {
     setSearch('')
   };
 
-  const removeItem = async (item) => {
+  const removeItem = async (item:any) => {
     const docRef = doc(collection(firestore, "inventory"), item);
     const docSnap = await getDoc(docRef);
 
@@ -53,7 +53,7 @@ export default function Home() {
     await updateInventory();
   };
 
-  const addItem = async (item) => {
+  const addItem = async (item:any) => {
     if (item) {
       handleClose();
       const docRef = doc(collection(firestore, "inventory"), item);
@@ -96,7 +96,7 @@ export default function Home() {
         </button>
         <form className="w-1/2 mx-auto">
           <label
-            for="default-search"
+            htmlFor="default-search"
             className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
           >
             Search
